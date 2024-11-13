@@ -20,7 +20,12 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${inter.className} bg-gray-900 text-white`}>
-                <header className="fixed top-0 w-full bg-gray-900/80 backdrop-blur-sm z-50 border-b border-yellow-500/20">
+                <div className="bg-yellow-400 text-gray-900 py-2 text-center">
+                    <p className="text-sm font-medium">
+                        This project is a work in progress. Features may be incomplete or subject to change.
+                    </p>
+                </div>
+                <header className="fixed top-[32px] w-full bg-gray-900/80 backdrop-blur-sm z-50 border-b border-yellow-500/20">
                     <div className="container mx-auto px-4">
                         <nav className="flex items-center justify-between h-16">
                             <Link href="/" className="flex items-center space-x-2">
@@ -50,7 +55,7 @@ export default function RootLayout({
                         </nav>
                     </div>
                 </header>
-                <main className="pt-16">
+                <main className="pt-32">
                     {children}
                 </main>
             </body>
