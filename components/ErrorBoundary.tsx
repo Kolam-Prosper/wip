@@ -1,41 +1,42 @@
 'use client'
 
-import React, { ErrorInfo, ReactNode } from 'react'
+import React, { Component, ErrorInfo, ReactNode } from 'react'
 
-interface ErrorBoundaryProps {
-    children: ReactNode
+interface Props {
+    children?: ReactNode
 }
 
-interface ErrorBoundaryState {
+interface State {
     hasError: boolean
 }
 
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
-    constructor(props: ErrorBoundaryProps) {
-        super(props)
-        this.state = { hasError: false }
+class ErrorBoundary extends Component<Props, State> {
+    public state: State = {
+        hasError: false
     }
 
-    static getDerivedStateFromError(_: Error): ErrorBoundaryState {
+    public static getDerivedStateFromError(_: Error): State {
         return { hasError: true }
     }
 
-    componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        console.error('ErrorBoundary caught an error:', error, errorInfo)
+    public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+        console.error('Uncaught error:', error, errorInfo)
     }
 
-    render() {
+    public render() {
         if (this.state.hasError) {
             return (
-                <div className="flex items-center justify-center min-h-screen bg-gray-900">
-                    <div className="text-center">
-                        <h1 className="text-3xl font-bold text-yellow-400 mb-4">Oops! Something went wrong.</h1>
-                        <p className="text-gray-300 mb-8">We're sorry for the inconvenience. Please try refreshing the page.</p>
+                <div className="min-h-screen flex items-center justify-center bg-gray-100">
+                    <div className="bg-white p-8 rounded-lg shadow-md">
+                        <h1 className="text-2xl font-bold text-red-600 mb-4">Oops! Something went wrong.</h1>
+                        <p className="text-gray-600 mb-4">
+                            We&apos;re sorry, but it seems there was an error. Please try refreshing the page or contact support if the problem persists.
+                        </p>
                         <button
-                            onClick={() => this.setState({ hasError: false })}
-                            className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded"
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                            onClick={() => window.location.reload()}
                         >
-                            Try Again
+                            Refresh Page
                         </button>
                     </div>
                 </div>
