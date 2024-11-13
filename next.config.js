@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    images: {
-        domains: ['example.com'], // Add any image domains you need here
+    poweredByHeader: false,
+    compress: true,
+    experimental: {
+        optimizeCss: true,
     },
-    // Add any other Next.js configuration options here
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

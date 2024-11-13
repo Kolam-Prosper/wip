@@ -6,11 +6,17 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog"
 
-export function FeatureNotCompleteModal({ isOpen, onClose }) {
+interface FeatureNotCompleteModalProps {
+    isOpen: boolean;
+    onOpenChange: (open: boolean) => void;
+}
+
+export function FeatureNotCompleteModal({ isOpen, onOpenChange }: FeatureNotCompleteModalProps) {
     return (
-        <Dialog open={isOpen} onOpenChange={onClose}>
+        <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Feature Not Complete</DialogTitle>
@@ -19,7 +25,7 @@ export function FeatureNotCompleteModal({ isOpen, onClose }) {
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
-                    <Button onClick={onClose}>Close</Button>
+                    <Button onClick={() => onOpenChange(false)}>Close</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

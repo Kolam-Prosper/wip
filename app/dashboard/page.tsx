@@ -75,7 +75,7 @@ export default function DashboardPage() {
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-semibold text-yellow-400">Your Investments</h2>
                     <Link href="/property-tracker">
-                        <Button variant="outline" className="text-yellow-400 border-yellow-400 hover:bg-yellow-400 hover:text-black">
+                        <Button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold">
                             View Property Tracker
                         </Button>
                     </Link>
