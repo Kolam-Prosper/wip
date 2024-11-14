@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
 import { ArrowRight, Building, DollarSign, Percent } from 'lucide-react'
@@ -29,6 +28,14 @@ export default function InvestPage() {
         setIsWIPModalOpen(true)
     }
 
+    const updateInvestmentAmount = (amount: number) => {
+        if (investmentType === "fractional") {
+            const fraction = selectedProperty.value / 100;
+            amount = Math.round(amount / fraction) * fraction;
+        }
+        setInvestmentAmount(amount);
+    }
+
     return (
         <div className="min-h-screen bg-gray-900 text-white">
             <WIPModal isOpen={isWIPModalOpen} setIsOpen={setIsWIPModalOpen} />
@@ -41,7 +48,7 @@ export default function InvestPage() {
                             <CardTitle className="text-2xl text-yellow-400">Investment Options</CardTitle>
                             <CardDescription className="text-gray-300">Choose your investment property and type</CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-6">
+                        <CardContent className="space-y-8">
                             <div className="space-y-2">
                                 <Label htmlFor="property" className="text-white">Select Property</Label>
                                 <Select
@@ -61,20 +68,19 @@ export default function InvestPage() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label className="text-white">Investment Type</Label>
-                                <RadioGroup defaultValue="fractional" onValueChange={setInvestmentType}>
-                                    <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="fractional" id="fractional" />
-                                        <Label htmlFor="fractional" className="text-gray-300">Fractional Bond</Label>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value="full" id="full" />
-                                        <Label htmlFor="full" className="text-gray-300">Full Bond</Label>
-                                    </div>
-                                </RadioGroup>
+                                <Label htmlFor="investmentType" className="text-white">Investment Type</Label>
+                                <Select onValueChange={setInvestmentType} defaultValue="fractional">
+                                    <SelectTrigger id="investmentType" className="bg-gray-700 border-gray-600 text-white">
+                                        <SelectValue placeholder="Select investment type" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="fractional">Fractional Bond</SelectItem>
+                                        <SelectItem value="full">Full Bond</SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </div>
 
-                            <div className="space-y-2">
+                            <div className="space-y-2 mb-4">
                                 <Label htmlFor="amount" className="text-white">Investment Amount (USD)</Label>
                                 <div className="flex items-center space-x-4">
                                     <Input
@@ -82,19 +88,21 @@ export default function InvestPage() {
                                         id="amount"
                                         placeholder="Enter amount"
                                         value={investmentAmount}
-                                        onChange={(e) => setInvestmentAmount(parseInt(e.target.value) || 0)}
+                                        onChange={(e) => updateInvestmentAmount(parseInt(e.target.value) || 0)}
                                         className="bg-gray-700 border-gray-600 text-white"
                                     />
                                     <span className="text-gray-300">Min: $1,000</span>
                                 </div>
-                                <Slider
-                                    min={1000}
-                                    max={investmentType === "full" ? selectedProperty.value : 100000}
-                                    step={1000}
-                                    value={[investmentAmount]}
-                                    onValueChange={(value) => setInvestmentAmount(value[0])}
-                                    className="mt-2"
-                                />
+                                <div className="py-4">
+                                    <Slider
+                                        min={1000}
+                                        max={investmentType === "full" ? selectedProperty.value : 100000}
+                                        step={1000}
+                                        value={[investmentAmount]}
+                                        onValueChange={(value) => updateInvestmentAmount(value[0])}
+                                        className="[&_[role=slider]]:bg-yellow-400 [&_[role=slider]]:border-yellow-400 [&_[role=slider]]:focus:ring-yellow-400/20 [&_.bg-primary]:bg-yellow-400"
+                                    />
+                                </div>
                             </div>
                         </CardContent>
                     </Card>
@@ -110,7 +118,7 @@ export default function InvestPage() {
                                 <span className="font-semibold text-white">{selectedProperty.name}</span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="text-gray-300">Property Value:</span>
+                                <span className="text-gray-300">Projected Completion Value:</span>
                                 <span className="font-semibold text-white">${selectedProperty.value.toLocaleString()}</span>
                             </div>
                             <div className="flex justify-between">
@@ -124,17 +132,14 @@ export default function InvestPage() {
                             <div className="flex justify-between">
                                 <span className="text-gray-300">Ownership Percentage:</span>
                                 <span className="font-semibold text-white">
-                                    {((investmentAmount / selectedProperty.value) * 100).toFixed(2)}%
+                                    {investmentType === "full" ? "100%" :
+                                        `${Math.floor((investmentAmount / selectedProperty.value) * 100)}%`}
                                 </span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="text-gray-300">Expected Annual Return:</span>
-                                <span className="font-semibold text-green-400">{selectedProperty.expectedReturn}%</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="text-gray-300">Estimated Annual Yield:</span>
+                                <span className="text-gray-300">18 Months Yield:</span>
                                 <span className="font-semibold text-green-400">
-                                    ${((investmentAmount * selectedProperty.expectedReturn) / 100).toLocaleString()}
+                                    ${((investmentAmount * selectedProperty.expectedReturn * 1.5) / 100).toLocaleString()}
                                 </span>
                             </div>
                         </CardContent>

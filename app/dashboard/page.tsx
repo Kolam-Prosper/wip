@@ -6,13 +6,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Building, DollarSign, TrendingUp } from 'lucide-react'
 import { FeatureNotCompleteModal } from "@/components/FeatureNotCompleteModal"
+import { InvestmentChart } from "@/components/InvestmentChart"
 
 // Mock data for demonstration purposes
 const mockUserData = {
     name: "John Doe",
     totalInvestment: 250000,
     totalProperties: 3,
-    totalReturns: 15000
+    projectedReturns: 15000
 }
 
 const mockInvestments = [
@@ -21,9 +22,31 @@ const mockInvestments = [
     { id: 3, name: "Downtown Dubai Apartment", value: 50000, returns: 2500 },
 ]
 
+const mockChartData = [
+    { name: 'Jan', value: 240000 },
+    { name: 'Feb', value: 245000 },
+    { name: 'Mar', value: 248000 },
+    { name: 'Apr', value: 250000 },
+    { name: 'May', value: 252000 },
+    { name: 'Jun', value: 255000 },
+    { name: 'Jul', value: 258000 },
+    { name: 'Aug', value: 260000 },
+    { name: 'Sep', value: 263000 },
+    { name: 'Oct', value: 265000 },
+    { name: 'Nov', value: 268000 },
+    { name: 'Dec', value: 270000 },
+    { name: 'Jan', value: 273000 },
+    { name: 'Feb', value: 275000 },
+    { name: 'Mar', value: 278000 },
+    { name: 'Apr', value: 280000 },
+    { name: 'May', value: 283000 },
+    { name: 'Jun', value: 285000 },
+]
+
 export default function DashboardPage() {
     const [userData] = useState(mockUserData)
     const [investments] = useState(mockInvestments)
+    const [chartData] = useState(mockChartData)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [selectedFeature, setSelectedFeature] = useState("")
 
@@ -63,13 +86,17 @@ export default function DashboardPage() {
                     </Card>
                     <Card className="bg-gray-800 border-yellow-400/20">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-gray-200">Total Returns</CardTitle>
+                            <CardTitle className="text-sm font-medium text-gray-200">Projected Returns</CardTitle>
                             <TrendingUp className="h-4 w-4 text-yellow-400" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-yellow-400">${userData.totalReturns.toLocaleString()}</div>
+                            <div className="text-2xl font-bold text-yellow-400">${userData.projectedReturns.toLocaleString()}</div>
                         </CardContent>
                     </Card>
+                </div>
+
+                <div className="mb-8">
+                    <InvestmentChart data={chartData} />
                 </div>
 
                 <div className="flex justify-between items-center mb-4">

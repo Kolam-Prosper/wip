@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Building, DollarSign, Percent, Users, Lock, Shield } from 'lucide-react'
 
-export default function Home() {
+export default function Component() {
     return (
         <div className="min-h-screen bg-gray-900 text-white">
             <main className="container mx-auto px-4 py-8">
@@ -83,7 +83,7 @@ export default function Home() {
                                 <CardTitle className="text-xl text-yellow-400">Risk Mitigation</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-gray-300">Only 30% of funds at risk. Investors can take back 70% at any time. We retain 20% of properties for potential sale to bolster investors&apos; positions if needed.</p>
+                                <p className="text-gray-300">Funds used for construction sit in Escrow while 70% of your initial investment can be staked for further rewards or free your asset as a loan at any time during development.</p>
                             </CardContent>
                         </Card>
                     </div>
@@ -91,31 +91,22 @@ export default function Home() {
 
                 <section className="text-center mb-12">
                     <h2 className="text-3xl font-bold mb-4 text-yellow-400">Investment Structure</h2>
-                    <p className="text-xl text-gray-300 mb-8">We offer Bonds sold in Dirhams stablecoin:</p>
+                    <p className="text-xl text-gray-300 mb-8">We offer bonds at a fixed price sold in stablecoins:</p>
                     <div className="grid md:grid-cols-3 gap-8">
                         <Card className="bg-gray-800 border-yellow-400/20">
                             <CardHeader>
                                 <CardTitle className="text-xl text-yellow-400">1% Fractional Bond</CardTitle>
                             </CardHeader>
-                            <CardContent>
-                                <p className="text-3xl font-bold text-white">$1,000</p>
-                            </CardContent>
                         </Card>
                         <Card className="bg-gray-800 border-yellow-400/20">
                             <CardHeader>
                                 <CardTitle className="text-xl text-yellow-400">10% Fractional Bond</CardTitle>
                             </CardHeader>
-                            <CardContent>
-                                <p className="text-3xl font-bold text-white">$10,000</p>
-                            </CardContent>
                         </Card>
                         <Card className="bg-gray-800 border-yellow-400/20">
                             <CardHeader>
                                 <CardTitle className="text-xl text-yellow-400">100% Full Bond</CardTitle>
                             </CardHeader>
-                            <CardContent>
-                                <p className="text-3xl font-bold text-white">$100,000</p>
-                            </CardContent>
                         </Card>
                     </div>
                     <p className="text-gray-300 mt-4">Bonds are locked for 5 years with automatic return of funds at expiry.</p>
