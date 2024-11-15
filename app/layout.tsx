@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { Header } from "@/components/ui/header"
+import { Header } from "@/components/ui/Header"
 import ErrorBoundary from '@/components/ErrorBoundary'
 import { Twitter, MessageCircle, Send } from 'lucide-react'
 import Link from 'next/link'
@@ -46,11 +46,11 @@ export default function RootLayout({
                     <footer className="bg-gray-800 py-6">
                         <div className="container mx-auto px-4 text-center text-gray-400">
                             <div className="flex justify-center space-x-6 mb-4">
-                                <Link href="https://wa.me/971523886321" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors duration-300">
+                                <Link href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors duration-300">
                                     <MessageCircle size={24} />
                                     <span className="sr-only">WhatsApp</span>
                                 </Link>
-                                <Link href="https://twitter.com/kolam_prosper" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors duration-300">
+                                <Link href="https://twitter.com/kolamprosper" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors duration-300">
                                     <Twitter size={24} />
                                     <span className="sr-only">Twitter</span>
                                 </Link>
