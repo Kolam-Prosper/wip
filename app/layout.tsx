@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { Header } from "@/components/ui/Header"
+import { Header } from "@/components/ui/header"
 import ErrorBoundary from '@/components/ErrorBoundary'
 import { Twitter, MessageCircle, Send } from 'lucide-react'
 import Link from 'next/link'
