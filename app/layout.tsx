@@ -6,7 +6,11 @@ import ErrorBoundary from '@/components/ErrorBoundary'
 import { Twitter, MessageCircle, Send } from 'lucide-react'
 import Link from 'next/link'
 
-const inter = Inter({ subsets: ['latin'] })
+// Optimize font loading
+const inter = Inter({
+    subsets: ['latin'],
+    display: 'swap', // Improve performance by allowing font swap
+})
 
 export const metadata: Metadata = {
     title: 'Kolam Prosper',
@@ -18,9 +22,25 @@ export const metadata: Metadata = {
             url: '/kolam-logo.svg',
         },
         {
+            rel: 'apple-touch-icon',
+            sizes: '180x180',
+            url: '/apple-touch-icon.png',
+        },
+        {
             rel: 'icon',
-            type: 'image/x-icon',
-            url: '/favicon.ico',
+            type: 'image/png',
+            sizes: '32x32',
+            url: '/favicon-32x32.png',
+        },
+        {
+            rel: 'icon',
+            type: 'image/png',
+            sizes: '16x16',
+            url: '/favicon-16x16.png',
+        },
+        {
+            rel: 'manifest',
+            url: '/site.webmanifest',
         },
     ],
 }
@@ -45,20 +65,20 @@ export default function RootLayout({
                     </main>
                     <footer className="bg-gray-800 py-6">
                         <div className="container mx-auto px-4 text-center text-gray-400">
-                            <div className="flex justify-center space-x-6 mb-4">
+                            <nav className="flex justify-center space-x-6 mb-4" aria-label="Social media links">
                                 <Link href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors duration-300">
-                                    <MessageCircle size={24} />
+                                    <MessageCircle size={24} aria-hidden="true" />
                                     <span className="sr-only">WhatsApp</span>
                                 </Link>
                                 <Link href="https://twitter.com/kolamprosper" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors duration-300">
-                                    <Twitter size={24} />
+                                    <Twitter size={24} aria-hidden="true" />
                                     <span className="sr-only">Twitter</span>
                                 </Link>
                                 <Link href="https://t.me/kolamprosper" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors duration-300">
-                                    <Send size={24} />
+                                    <Send size={24} aria-hidden="true" />
                                     <span className="sr-only">Telegram</span>
                                 </Link>
-                            </div>
+                            </nav>
                             <p>&copy; {new Date().getFullYear()} Kolam Prosper. All rights reserved.</p>
                         </div>
                     </footer>
