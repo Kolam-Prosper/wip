@@ -1,6 +1,5 @@
 ﻿'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -19,20 +18,13 @@ const navItems = [
 
 export function Header() {
     const pathname = usePathname()
-    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <header className="bg-gray-900/80 backdrop-blur-sm z-50 border-b border-yellow-500/20 sticky top-0">
             <div className="container mx-auto px-4">
                 <nav className="flex items-center justify-between h-16">
                     <Link href="/" className="flex items-center space-x-2">
-                        <div className="relative w-10 h-10">
-                            <Image
-                                src="/kolam-logo.svg"
-                                alt="Kolam Prosper Logo"
-                                layout="fill"
-                            />
-                        </div>
+                        <Image src="/kolam-logo.svg" alt="Kolam Prosper Logo" width={40} height={40} />
                         <span className="text-xl font-bold text-yellow-400">Kolam Prosper</span>
                     </Link>
                     <div className="hidden md:flex items-center space-x-6">
@@ -52,7 +44,7 @@ export function Header() {
                             Connect Wallet
                         </Button>
                     </div>
-                    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                    <Sheet>
                         <SheetTrigger asChild>
                             <Button
                                 variant="ghost"
@@ -73,17 +65,12 @@ export function Header() {
                                             "flex items-center gap-2 px-3 py-2 rounded-md text-gray-300 transition-all hover:text-yellow-400",
                                             pathname === item.href ? "bg-gray-800 text-yellow-400" : "hover:bg-gray-800"
                                         )}
-                                        onClick={() => setIsOpen(false)}
                                     >
                                         {item.label}
                                     </Link>
                                 ))}
                                 <Button
                                     className="bg-yellow-400 hover:bg-yellow-500 text-black mt-4 transition-colors duration-300"
-                                    onClick={() => {
-                                        console.log('Connecting wallet...')
-                                        setIsOpen(false)
-                                    }}
                                 >
                                     Connect Wallet
                                 </Button>
