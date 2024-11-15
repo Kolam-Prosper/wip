@@ -1,16 +1,28 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Link from 'next/link'
-import Image from 'next/image'
-import { Button } from "@/components/ui/button"
+import { Header } from "@/components/ui/header"
 import ErrorBoundary from '@/components/ErrorBoundary'
+import { Twitter, MessageCircle, Send } from 'lucide-react'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
     title: 'Kolam Prosper',
     description: 'Invest in real estate with Kolam Prosper',
+    icons: [
+        {
+            rel: 'icon',
+            type: 'image/svg+xml',
+            url: '/kolam-logo.svg',
+        },
+        {
+            rel: 'icon',
+            type: 'image/x-icon',
+            url: '/favicon.ico',
+        },
+    ],
 }
 
 export default function RootLayout({
@@ -27,47 +39,26 @@ export default function RootLayout({
                             This project is a work in progress. Features may be incomplete or subject to change.
                         </p>
                     </div>
-                    <header className="bg-gray-900/80 backdrop-blur-sm z-50 border-b border-yellow-500/20 sticky top-0">
-                        <div className="container mx-auto px-4">
-                            <nav className="flex items-center justify-between h-16">
-                                <Link href="/" className="flex items-center space-x-2">
-                                    <Image src="/kolam-logo.svg" alt="KolamProsper Logo" width={40} height={40} />
-                                    <span className="text-xl font-bold text-yellow-400">Kolam Prosper</span>
-                                </Link>
-                                <div className="hidden md:flex items-center space-x-6">
-                                    <Link href="/" className="text-sm text-gray-300 hover:text-yellow-400">
-                                        Home
-                                    </Link>
-                                    <Link href="/dashboard" className="text-sm text-gray-300 hover:text-yellow-400">
-                                        Dashboard
-                                    </Link>
-                                    <Link href="/invest" className="text-sm text-gray-300 hover:text-yellow-400">
-                                        Invest
-                                    </Link>
-                                    <Link href="/pools" className="text-sm text-gray-300 hover:text-yellow-400">
-                                        Pools
-                                    </Link>
-                                    <Link href="/property-tracker" className="text-sm text-gray-300 hover:text-yellow-400">
-                                        Property Tracker
-                                    </Link>
-                                    <Button className="bg-yellow-400 hover:bg-yellow-500 text-black">
-                                        Connect Wallet
-                                    </Button>
-                                </div>
-                                <button className="md:hidden text-yellow-400 hover:text-yellow-500">
-                                    <span className="sr-only">Open main menu</span>
-                                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                    </svg>
-                                </button>
-                            </nav>
-                        </div>
-                    </header>
+                    <Header />
                     <main className="flex-grow">
                         {children}
                     </main>
                     <footer className="bg-gray-800 py-6">
                         <div className="container mx-auto px-4 text-center text-gray-400">
+                            <div className="flex justify-center space-x-6 mb-4">
+                                <Link href="https://wa.me/971523886321" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors duration-300">
+                                    <MessageCircle size={24} />
+                                    <span className="sr-only">WhatsApp</span>
+                                </Link>
+                                <Link href="https://twitter.com/kolam_prosper" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors duration-300">
+                                    <Twitter size={24} />
+                                    <span className="sr-only">Twitter</span>
+                                </Link>
+                                <Link href="https://t.me/kolamprosper" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors duration-300">
+                                    <Send size={24} />
+                                    <span className="sr-only">Telegram</span>
+                                </Link>
+                            </div>
                             <p>&copy; {new Date().getFullYear()} Kolam Prosper. All rights reserved.</p>
                         </div>
                     </footer>
